@@ -877,6 +877,18 @@
             el.classList.add('show');
         });
     });
+
+    // 1. Membaca parameter '?to=' pada URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaTamu = urlParams.get('to');
+
+    // 2. Jika ada nama di parameter URL, ganti teks di cover secara otomatis
+    if (namaTamu) {
+        const elementNama = document.getElementById('tamu-nama-cover');
+        if (elementNama) {
+            elementNama.innerText = namaTamu;
+        }
+    }
 </script>
 </body>
 </html>
