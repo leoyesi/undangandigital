@@ -525,8 +525,7 @@
     // =========================================================================
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyAx13py4bkEN6mp8QxbhChRdSwZv8rbZ96nPlPSpv7-1KTufG0nwLdrmsjdDhYMPffIA/exec";
 
-    // Parsing ID Event dari parameter URL. 
-    // Jika tidak ada ?event= di URL, otomatis fallback default ke 'PSB-SD-2026'
+    // Parsing ID Event & Nama Tamu dari parameter URL
     const urlParams = new URLSearchParams(window.location.search);
     const eventId = urlParams.get('event') || 'PSB-SD-2026';
 
@@ -612,7 +611,12 @@
         if(document.getElementById("sub-judul-1")) document.getElementById("sub-judul-1").innerText = config.judulEvent || "";
         if(document.getElementById("sub-judul-2")) document.getElementById("sub-judul-2").innerText = config.subtitleEvent || "";
         if(document.getElementById("judul-opening")) document.getElementById("judul-opening").innerHTML = config.judulCoverUtama || "";
-        if(document.getElementById("tamu-nama-cover")) document.getElementById("tamu-nama-cover").innerText = config.kepadaYth || "Orang Tua / Wali Murid";
+        
+        // [KOREKSI DI SINI]: Prioritaskan nama tamu dari URL (?to=)
+        const namaTamuFromUrl = urlParams.get('to');
+        if(document.getElementById("tamu-nama-cover")) {
+            document.getElementById("tamu-nama-cover").innerText = namaTamuFromUrl || config.kepadaYth || "Orang Tua / Wali Murid";
+        }
 
         // Element Halaman Isi
         if(document.getElementById("motto-title")) document.getElementById("motto-title").innerText = config.judulSambutan || "";
@@ -668,7 +672,6 @@
         
         if (!targetDateString) return;
 
-        // Trik Parse Tanggal Aman untuk Semua Browser & Format dari Google Sheet
         let formattedStr = String(targetDateString).trim();
         if (!formattedStr.includes("T") && formattedStr.includes("-")) {
             formattedStr = formattedStr.replace(/-/g, "/");
@@ -676,7 +679,6 @@
         
         var targetDate = new Date(formattedStr).getTime();
 
-        // Jika tanggal tidak valid, batalkan agar tidak NaN
         if (isNaN(targetDate)) {
             console.warn("Format tanggal countdown dari Google Sheet tidak valid:", targetDateString);
             return;
@@ -706,7 +708,7 @@
             if(document.getElementById("cd-seconds")) document.getElementById("cd-seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
         }
 
-        updateTimer(); // Jalankan langsung detik pertama tanpa menunggu interval 1 detik
+        updateTimer();
         countdownInterval = setInterval(updateTimer, 1000);
     }
 
@@ -876,21 +878,6 @@
         coverElements.forEach(function(el) {
             el.classList.add('show');
         });
-    });
-
-    // Menunggu seluruh struktur elemen HTML selesai dimuat
-    document.addEventListener("DOMContentLoaded", function() {
-        // 1. Membaca parameter '?to=' pada URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const namaTamu = urlParams.get('to');
-
-        // 2. Jika ada nama di parameter URL, ganti teks di cover secara otomatis
-        if (namaTamu) {
-            const elementNama = document.getElementById('tamu-nama-cover');
-            if (elementNama) {
-                elementNama.innerText = namaTamu;
-            }
-        }
     });
 </script>
 </body>
