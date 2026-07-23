@@ -565,6 +565,20 @@
                     ketentuanSection.style.display = "none";
                 }
 
+                // [TAMBAHAN BARU]: Poster Acara Utama
+            const posterSection = document.getElementById("poster-section");
+            const posterImage = document.getElementById("poster-image");
+            if (posterImage && data.config.posterUrl) {
+                posterImage.src = data.config.posterUrl;
+            }
+            if (posterSection) {
+                if (data.config.tampilkanPoster && data.config.tampilkanPoster.toUpperCase() === "TIDAK") {
+                    posterSection.style.display = "none";
+                } else if (data.config.posterUrl) {
+                    posterSection.style.display = "block";
+                }
+            }
+
                 // Isi Rundown Acara
                 applyRundown(data.rundown);
 
