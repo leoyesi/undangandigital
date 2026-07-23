@@ -600,24 +600,24 @@
                 }
             }
 
-              // Pengaturan RSVP Section
+// --- KONTROL SECTION RSVP ---
 const rsvpSection = document.getElementById("rsvp-section");
 if (rsvpSection) {
-    const statusRsvp = (config["Tampilkan RSVP"] || config.tampilkanRsvp || "YA").toString().toUpperCase();
+    const statusRsvp = (data.config["Tampilkan RSVP"] || data.config.tampilkanRsvp || "YA").toString().toUpperCase();
     if (statusRsvp === "TIDAK") {
         rsvpSection.style.display = "none";
     } else {
         rsvpSection.style.display = "block";
         
         // Update Link RSVP
-        const link = config["Link RSVP"] || config.linkRsvp;
+        const link = data.config["Link RSVP"] || data.config.linkRsvp;
         const rsvpLinkEl = document.getElementById("rsvp-link");
         if (link && rsvpLinkEl) {
             rsvpLinkEl.href = link;
         }
         
         // Update Tenggat Waktu
-        const tenggat = config["Dateline RSVP"] || config["Deadline RSVP"] || config.datelineRsvp || config.deadlineRsvp;
+        const tenggat = data.config["Dateline RSVP"] || data.config["Deadline RSVP"] || data.config.datelineRsvp || data.config.deadlineRsvp;
         const rsvpDeadlineEl = document.getElementById("rsvp-deadline");
         if (tenggat && rsvpDeadlineEl) {
             rsvpDeadlineEl.innerText = "🗓️ RSVP paling lambat " + tenggat;
