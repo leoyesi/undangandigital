@@ -127,10 +127,9 @@
     top: 0; left: 0; width: 100%; height: 100%; z-index: 999;
     display: flex; 
     flex-direction: column; 
-    justify-content: center; /* Meratakan semua konten ke tengah layar secara natural */
+    justify-content: space-between; /* Menyebarkan elemen Atas, Tengah, dan Bawah */
     align-items: center;
-    gap: 20px; /* Menjaga jarak antar komponen konsisten di semua layar HP */
-    padding: 30px 24px; 
+    padding: 50px 24px 90px 24px; /* <--- 90px di bawah ini yang MENDORONG tombol naik lebih tinggi */
     text-align: center; 
     color: white;
     transition: opacity 1s ease, transform 1s ease;
@@ -148,13 +147,13 @@
     flex-direction: column; 
     align-items: center; 
     justify-content: center; 
-    margin-top: 10px; /* Jarak aman di bawah kotak Kepada Yth */
-    transform: none !important; /* Hapus semua nilai translateY minus yang merusak layout */
+    margin-top: 0;
+    transform: none !important; /* Hapus transform minus agar tidak merusak layout */
 }
 
 .btn-enter-gate {
     position: relative;
-    width: 60px; height: 60px;
+    width: 65px; height: 65px;
     background: linear-gradient(135deg, rgba(11, 49, 91, 0.95) 0%, rgba(0, 123, 167, 0.85) 100%);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
@@ -166,7 +165,7 @@
     pointer-events: none;
 }
 
-.btn-enter-gate i { font-size: 18px; margin-left: 3px; }
+.btn-enter-gate i { font-size: 20px; margin-left: 4px; }
 
 .ripple-circle {
     position: absolute;
@@ -182,14 +181,14 @@
 .ripple-2 { animation-delay: 0.8s; }
 
 @keyframes ripple-anim {
-    0% { width: 60px; height: 60px; opacity: 1; }
-    100% { width: 130px; height: 130px; opacity: 0; }
+    0% { width: 65px; height: 65px; opacity: 1; }
+    100% { width: 140px; height: 140px; opacity: 0; }
 }
 
 .gate-text { 
-    margin-top: 12px; 
-    font-size: 10.5px; 
-    letter-spacing: 3px; 
+    margin-top: 15px; 
+    font-size: 11px; 
+    letter-spacing: 4px; 
     text-transform: uppercase; 
     color: rgba(255, 255, 255, 0.85); 
     font-weight: 500; 
