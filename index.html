@@ -163,7 +163,7 @@
     flex-direction: column; 
     align-items: center; 
     justify-content: center; 
-    margin-top: -30px; /* <--- MENGATUR KETINGGIAN: Ubah nilai ini (-10px s/d -50px) untuk menaikkan seluruh tombol & teks */
+    margin-top: -90px; /* <--- Cukup ubah angka ini untuk naik/turunkan semuanya sekaligus */
 }
 
 .btn-enter-gate {
@@ -185,7 +185,7 @@
 .ripple-circle {
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%); /* Mengembalikan posisi gelombang tepat di tengah tombol */
+    transform: translate(-50%, -50%);
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.6);
     animation: ripple-anim 2.5s infinite cubic-bezier(0.1, 0.6, 0.4, 1);
@@ -201,13 +201,14 @@
 }
 
 .gate-text { 
-    margin-top: 15px; /* Jarak rapi antara tombol bulat dengan teks di bawahnya */
+    margin-top: 15px; 
     font-size: 11px; 
     letter-spacing: 4px; 
     text-transform: uppercase; 
     color: rgba(255, 255, 255, 0.85); 
     font-weight: 500; 
 }
+        
         /* ========================================== */
         /* 5. ANIMASI TRANSISI ELEGAN                 */
         /* ========================================== */
