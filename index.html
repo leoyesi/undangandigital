@@ -490,7 +490,7 @@
         </div>
     </section>
 
-    <section id="map-section" style="background-color: var(--earth-beige); text-align: center;">
+    <section id="map-section" style="background-color: var(--earth-beige); text-align: center; display: none;">
     <div class="animate-up">
         <span class="motto-tag">LOKASI</span>
         <h2 class="shine-text" style="font-size: 20px; margin-bottom: 8px;">Peta Sekolah</h2>
@@ -500,7 +500,7 @@
                 Klik tombol di bawah ini untuk melihat petunjuk arah lokasi Sekolah Athalia secara langsung di Google Maps.
             </p>
 
-            <a id="map-link" href="https://maps.app.goo.gl/RU3h4DUubb6E89vs9" target="_blank" class="btn-action" style="background-color: var(--navy); color: var(--white); border: 1px solid var(--navy); font-size: 13px; padding: 14px 22px; border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(11, 49, 91, 0.2); transition: all 0.3s ease;">
+            <a id="map-link" href="#" target="_blank" class="btn-action" style="background-color: var(--navy); color: var(--white); border: 1px solid var(--navy); font-size: 13px; padding: 14px 22px; border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(11, 49, 91, 0.2); transition: all 0.3s ease;">
                 <i class="fa-solid fa-location-dot" style="color: var(--clay); font-size: 16px;"></i> Buka Google Maps
             </a>
         </div>
@@ -617,6 +617,36 @@ if (rsvpSection) {
         if (tenggat && rsvpDeadlineEl) {
             rsvpDeadlineEl.innerText = "🗓️ RSVP paling lambat " + tenggat;
         }
+    }
+}
+                // --- KONTROL TAYANG MAP SEKOLAH ---
+const mapSection = document.getElementById("map-section");
+const mapLink = document.getElementById("map-link");
+
+if (mapSection && typeof data !== "undefined") {
+    // 1. Ambil status tayang (kolom 'Tampilkan Map') & link (kolom 'Link Map')
+    const rawStatus = data["Tampilkan Map"] || data["tampilkanMap"] || "";
+    const rawLink = data["Link Map"] || data["linkMap"] || "";
+
+    const statusMap = String(rawStatus).trim().toLowerCase();
+    const linkMap = String(rawLink).trim();
+
+    // 2. Evaluasi kondisi Ya / Tidak
+    const isYa = statusMap === "ya" || statusMap === "y" || statusMap === "true";
+    const isTidak = statusMap === "tidak" || statusMap === "t" || statusMap === "false" || linkMap.toLowerCase() === "tidak";
+    const hasValidLink = linkMap !== "" && linkMap.toLowerCase() !== "tidak" && linkMap !== "undefined";
+
+    // 3. Logika Penayangan
+    // Tampil jika: Status = "Ya" ATAU (Link terisi & Status bukan "Tidak")
+    if (isYa || (hasValidLink && !isTidak)) {
+        mapSection.style.display = "block"; // Tampilkan kotak Map
+
+        // Update link tombol jika ada URL valid di Sheet
+        if (mapLink && hasValidLink) {
+            mapLink.href = linkMap;
+        }
+    } else {
+        mapSection.style.display = "none"; // Sembunyikan kotak Map
     }
 }
 
