@@ -714,7 +714,9 @@ async function loadDigitalInvitation() {
 
         // Element Halaman Isi
         if(document.getElementById("motto-title")) document.getElementById("motto-title").innerText = config.judulSambutan || "";
-        if(document.getElementById("motto-desc")) document.getElementById("motto-desc").innerText = config.teksSambutan || "";
+
+        // ✅ Gunakan .innerHTML di sini agar tag HTML <strong> dibaca sebagai format BOLD
+        if(document.getElementById("motto-desc")) document.getElementById("motto-desc").innerHTML = config.teksSambutan || "";
         
         if (config.videoYoutubeEmbedId && document.getElementById("youtube-embed")) {
             document.getElementById("youtube-embed").src = `https://www.youtube.com/embed/${config.videoYoutubeEmbedId}`;
