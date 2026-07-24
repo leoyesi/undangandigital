@@ -620,6 +620,33 @@ if (rsvpSection) {
     }
 }
 
+                // --- KONTROL SECTION MAP GOOGLE ---
+                const mapSection = document.getElementById("map-section");
+const mapLink = document.getElementById("map-link");
+
+if (mapSection) {
+    // Ambil nilai dari Google Sheets (sesuaikan variabel 'data' dengan variabel penampung data kamu)
+    const linkMap = data["Link Map"] ? String(data["Link Map"]).trim() : "";
+    const statusMap = data["Tampilkan Map"] ? String(data["Tampilkan Map"]).trim().toLowerCase() : "";
+
+    // Cek apakah status "Ya" ATAU kolom [Link Map] berisi URL valid (bukan "Tidak" / kosong)
+    const IS_VAL_Y = statusMap === "ya" || statusMap === "y" || statusMap === "true";
+    const IS_VAL_N = statusMap === "tidak" || statusMap === "t" || statusMap === "false" || linkMap.toLowerCase() === "tidak";
+
+    if (!IS_VAL_N && (IS_VAL_Y || linkMap !== "")) {
+        // 1. Tampilkan section map
+        mapSection.style.display = "block";
+
+        // 2. Set/update href tombol jika ada link
+        if (mapLink && linkMap && linkMap.toLowerCase() !== "tidak") {
+            mapLink.href = linkMap;
+        }
+    } else {
+        // Sembunyikan section map jika bernilai "Tidak" atau kosong
+        mapSection.style.display = "none";
+    }
+}
+
                 // Isi Rundown Acara
                 applyRundown(data.rundown);
 
